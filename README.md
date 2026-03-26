@@ -4,7 +4,7 @@ A Python implementation for computing narrow band radiation model in gas mixture
 
 ## Overview
 
-Statistical Narrow band is a simplified model for modelling the transmission coefficients through gas mixtures in a non-gray basis. It is considered one of the most precise models. The method is just based on a least squares fitting of the malkmus equation to find the parameters (delta) thaat minimize the error compared with line by line calculations. 
+Statistical Narrow band is a simplified model for modelling the transmission coefficients through gas mixtures in a non-gray basis, band-by-band. It is considered one of the most precise models, although is very difficult to introduce scattering when using the Narrow Band approach. The method is just based on a least squares fitting of the malkmus equation to find the parameters thaat minimize the error compared with line by line calculations. 
 
 ## Inputs
 
