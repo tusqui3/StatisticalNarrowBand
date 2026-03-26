@@ -1,6 +1,6 @@
 # Narrow Band Radiation Model
 
-A Python implementation for computing narrow band radiation model in gas mixtures using the Malkmus model for gaseous species in high temperature applications. Based on Radis and *International Journal of Heat and Mass Transfer*, 2012, DOI: 10.1016/j.ijheatmasstransfer.2012.03.019. The code returns the statistical narrow band parameters as a function of the wavenumber band and the temperature, for each specie. 
+A Python implementation to compute narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications. Based on Radis and *International Journal of Heat and Mass Transfer*, 2012, DOI: 10.1016/j.ijheatmasstransfer.2012.03.019. The code returns the statistical narrow band parameters as a function of the wavenumber band and the temperature, for each specie. 
 
 ## Overview
 
