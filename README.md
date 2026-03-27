@@ -13,7 +13,7 @@ The code returns the statistical narrow band parameter table for a single specie
 | `k` | `cm⁻¹ bar⁻¹` | Band-mean absorption coefficient per unit partial pressure |
 | `delta` | `cm⁻¹` | Optimal mean line spacing (Malkmus parameter) |
 
-Results are written to a plain-text file with the following structure:
+Results are written to a plain-text file with the following structure as in the paper
 - First block (one row per wavenumber band): `wavenumber  k(T1)  k(T2)  ...  k(Tn)`
 - Second block (one row per wavenumber band): `wavenumber  delta(T1)  delta(T2)  ...  delta(Tn)`
 
