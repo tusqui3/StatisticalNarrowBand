@@ -1,6 +1,6 @@
 # Narrow Band Radiation Model
 
-A python implementation to compute narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications. Based on RADIS and the following reference,
+A python implementation to compute narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications such as combustion chambers. Based on RADIS and the following reference,
 
  *Updated band model parameters for H2O, CO2, CH4 and CO radiation at high temperature*, Philippe Rivière, Anouar Soufiani, 2012
 
@@ -19,7 +19,9 @@ Results are written to a plain-text file with the following structure as in the 
 
 ## Overview
 
-The Statistical narrow band model is a simplified approach for computing spectral transmission coefficients through gas mixtures on a band-by-band basis. It is considered one of the most accurate engineering radiation models, though it is difficult to incorporate scattering within the narrow band framework and is expensive in comparison with other gray models. thee method works by least-squares fitting of the Malkmus equation to transmittances computed from line-by-line (LBL) spectra — generated here via RADIS — to find the parameters that minimize the error with respect to the LBL reference.
+The RTE is monochromatic, so requires integrating over all frequencies, however each local κ_ν in a real gas is a the contribution of millions broadened lines, making full line-by-line integration expensive. Gas mixtures add further complexity because species lines overlap non-additively. The narrow band approach models this by dividing the spectrum into windows where line statistics are constant and fitting the Malkmus equation to LBL reference data, giving a analytic transmittance per band.
+
+the method works by least-squares fitting of the Malkmus equation to transmittances computed from line-by-line (LBL) spectra — generated here via RADIS — to find the parameters that minimize the error with respect to the LBL reference. The narrow-band model is built around computing transmittances along a path, which implicitly assumes a purely absorbing/emitting media, that does not allow scattering.
 
 ## Inputs
 
