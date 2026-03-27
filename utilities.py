@@ -1,7 +1,3 @@
-"""
-Utility functions for narrow band radiation modeling.
-"""
-
 import numpy as np
 from scipy.optimize import brentq
 from radis.lbl.factory import SpectrumFactory
@@ -38,13 +34,18 @@ def init_spectrum(
         diluent=diluent,
         truncation=truncation,
         medium=medium,
-        verbose=verbose
+        verbose=verbose,
+        optimization=None
     )
-    sf.load_databank(
+    try:
+        sf.load_databank(
         path=databankPath,
         format=databankType,
         db_use_cached=True
     )
+    except Exception:
+        # First run — download and cache it
+        sf.fetch_databank(databankPath)
     return sf
 
 
@@ -54,7 +55,7 @@ def transmittance(spectrum, x, delta_wn):
     transmittance_noslit = spectrum.get('transmittance_noslit')
     
     if len(transmittance_noslit[0]) > 0:
-        integral_transmittance = np.trapz(transmittance_noslit[1], transmittance_noslit[0])
+        integral_transmittance = np.trapezoid(transmittance_noslit[1], transmittance_noslit[0])
         t = integral_transmittance / delta_wn
         return max(0.0, min(1.0, t))
     else:
@@ -65,7 +66,7 @@ def transmittance(spectrum, x, delta_wn):
 def abs_coeff(spectrum, delta_wn, molar_fraction, pressure):
     """Calculate absorption coefficient. Pressure in atm."""
     absorbance = spectrum.get("abscoeff")
-    integral_k = np.trapz(absorbance[1], absorbance[0])
+    integral_k = np.trapezoid(absorbance[1], absorbance[0])
     return (integral_k / delta_wn) * (1 / (molar_fraction * pressure))
 
 
@@ -115,4 +116,10 @@ def gamma_h2o(temperature, pressure, molar_fraction):
     """Temperature and pressure dependent gamma for H2O."""
     Tref = 296
     Pref = 1.0
-    return (pressure / Pref) * (0.462*molar_fraction*((Tref / temperature)**0.7) + ((Tref/ temperature)**0.5) * 0.0792)
+    return (pressure / Pref) * (0.462*molar_fraction*((Tref / temperature)) + ((Tref/ temperature)**0.5) * 0.0792)
+
+def gamma_ch4(temperature, pressure, molar_fraction):
+    """Temperature and pressure dependent gamma for CH4."""
+    Tref = 296
+    Pref = 1.0
+    return (pressure / Pref) * 0.051* (Tref/ temperature)**0.75
