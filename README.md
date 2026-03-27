@@ -6,7 +6,7 @@ A python implementation to compute narrow band parameters for thermal radiation 
 
 The code returns the statistical narrow band parameter table for a single species as a function of wavenumber band and temperature.
 
-**Outputs:**
+Outputs:
 
 | Parameter | Units | Description |
 |-----------|-------|-------------|
@@ -17,13 +17,13 @@ Results are written to a plain-text file with the following structure as in the 
 - First block (one row per wavenumber band): `wavenumber  k(T1)  k(T2)  ...  k(Tn)`
 - Second block (one row per wavenumber band): `wavenumber  delta(T1)  delta(T2)  ...  delta(Tn)`
 
-## Overview
+## summary
 
 The RTE is monochromatic, so requires integrating over all frequencies, however each local κ_ν in a real gas is a the contribution of millions broadened lines, making full line-by-line integration expensive. Gas mixtures add further complexity because species lines overlap non-additively. The narrow band approach models this by dividing the spectrum into windows where line statistics are constant and fitting the Malkmus equation to LBL reference data, giving a analytic transmittance per band.
 
 the method works by least-squares fitting of the Malkmus equation to transmittances computed from line-by-line (LBL) spectra — generated here via RADIS — to find the parameters that minimize the error with respect to the LBL reference. The narrow-band model is built around computing transmittances along a path, which implicitly assumes a purely absorbing/emitting media, that does not allow scattering.
 
-## Inputs
+## input parameters
 
 The following parameters must be specified inside the `main()` function:
 
@@ -45,7 +45,7 @@ The following parameters must be specified inside the `main()` function:
 
 > **Note:**  averaged Lorentz half-widths (`γ`) are implemented for `H2O`, `CO2`, `CH4`, and `CO`. The code automatically switch between these, To use any other species, a custom `gamma_*` function must be added to `utilities.py`.
 
-## Basic Usage
+## use
 ```python
 from main import main
 
