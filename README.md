@@ -1,4 +1,4 @@
-# Narrow Band Radiation Model
+# Narrow Band Parameter Creation from Radis
 
 A python implementation to obtain narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications such as combustion chambers. Based on RADIS and the following reference,
 
