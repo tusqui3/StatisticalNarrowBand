@@ -45,7 +45,7 @@ def init_spectrum(
     )
     except Exception:
         # First run — download and cache it
-        sf.fetch_databank(databankPath)
+        sf.fetch_databank(databankType)
     return sf
 
 
@@ -97,20 +97,17 @@ def tau_malkmus(l, k, pressure, delta, moleFraction, gamma):
     )
     return tau
 
-
 def gamma_co(temperature, pressure, molar_fraction):
     """Temperature and pressure dependent gamma for CO."""
     Tref = 296
     Pref = 1.0
     return ((Tref / temperature)**0.7) * (pressure / Pref) * 0.06
 
-
 def gamma_co2(temperature, pressure, molar_fraction):
     """Temperature and pressure dependent gamma for CO2."""
     Tref = 296
     Pref = 1.0
     return ((Tref / temperature)**0.7) * (pressure / Pref) * (0.07*molar_fraction + (1-molar_fraction)*0.058)
-
 
 def gamma_h2o(temperature, pressure, molar_fraction):
     """Temperature and pressure dependent gamma for H2O."""

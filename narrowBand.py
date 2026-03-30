@@ -1,12 +1,8 @@
 """
-Input parameters can be configured in main() function.
+Input parameters can be configured in build_narrow_band() function.
 
 ONLY WORKS WITH H2O, CO2, CH4 and CO.
 IF YOU WANT TO USE ANOTHER SPECIE, YOU HAVE TO SPECIFY A customized avg Lorentz line-widths. in utilities.py
-
-OUTPUTS:
-k cm⁻¹ bar⁻¹ Band-mean absorption coefficient per unit partial pressure
-delta cm⁻¹Optimal mean line spacing (Malkmus parameter)
 """
 
 import numpy as np

@@ -1,31 +1,25 @@
 # Narrow Band Radiation Model
 
-A python implementation to compute narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications such as combustion chambers. Based on RADIS and the following reference,
+A python implementation to obtain narrow band parameters for thermal radiation in gas mixtures using the Malkmus model for gaseous species in high temperature applications such as combustion chambers. Based on RADIS and the following reference,
 
  *Updated band model parameters for H2O, CO2, CH4 and CO radiation at high temperature*, Philippe Rivière, Anouar Soufiani, 2012
 
-The code returns the statistical narrow band parameter table for a single species as a function of wavenumber band and temperature.
+The method works by least-squares fitting of the Malkmus equation to transmittances computed from line-by-line (LBL) spectra — generated here via RADIS — to find the parameters that minimize the error with respect to the LBL reference.
 
 Outputs:
 
-| Parameter | Units | Description |
-|-----------|-------|-------------|
-| `k` | `cm⁻¹ bar⁻¹` | Band-mean absorption coefficient per unit partial pressure |
-| `delta` | `cm⁻¹` | Optimal mean line spacing (Malkmus parameter) |
+| Parameter | Units | 
+|-----------|-------|
+| `k` | `cm⁻¹ bar⁻¹` | 
+| `delta` | `cm⁻¹`  |
 
-Results are written to a plain-text file with the following structure as in the paper
+Results are written to a ascii file with the following structure as in the paper
 - First block (one row per wavenumber band): `wavenumber  k(T1)  k(T2)  ...  k(Tn)`
 - Second block (one row per wavenumber band): `wavenumber  delta(T1)  delta(T2)  ...  delta(Tn)`
 
-## summary
+## Input parameters
 
-The RTE is monochromatic, so requires integrating over all frequencies, however each local κ_ν in a real gas is a the contribution of millions broadened lines, making full line-by-line integration expensive. Gas mixtures add further complexity because species lines overlap non-additively. The narrow band approach models this by dividing the spectrum into windows where line statistics are constant and fitting the Malkmus equation to LBL reference data, giving a analytic transmittance per band.
-
-the method works by least-squares fitting of the Malkmus equation to transmittances computed from line-by-line (LBL) spectra — generated here via RADIS — to find the parameters that minimize the error with respect to the LBL reference. The narrow-band model is built around computing transmittances along a path, which implicitly assumes a purely absorbing/emitting media, that does not allow scattering.
-
-## input parameters
-
-The following parameters must be specified inside the `main()` function:
+The following parameters must be specified inside the `build_narrow_band()` function. More detail in Radis docmentation:
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
@@ -46,9 +40,14 @@ The following parameters must be specified inside the `main()` function:
 > **Note:**  averaged Lorentz half-widths (`γ`) are implemented for `H2O`, `CO2`, `CH4`, and `CO`. The code automatically switch between these, To use any other species, a custom `gamma_*` function must be added to `utilities.py`.
 
 ## use
-```python
-from main import main
 
-# Configure parameters inside main() then run:
-main()
+Sometimes,hitran-api has to be installed apart with:
+```
+pip install hitran-api
+```
+
+```python
+from narrowBand import build_narrow_band
+# Configure parameters inside build_narrow_band() then run:
+build_narrow_band()
 ```
