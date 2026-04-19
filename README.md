@@ -43,7 +43,7 @@ The following parameters must be specified inside the `build_narrow_band()` func
 
 Sometimes,hitran-api has to be installed apart with:
 ```
-pip install hitran-api
+pip install radis
 ```
 
 ```python
